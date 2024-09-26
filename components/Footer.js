@@ -23,7 +23,7 @@ function Footer() {
                 </h3>
                 <p className="text-gray-300">
                   OceanView News delivers round-the-clock coverage of global
-                  events, ensuring you're always in the know.
+                  events, ensuring you&apos re always in the know.
                 </p>
               </div>
               <div>
