@@ -1,0 +1,102 @@
+/* styles/Navbar.module.css */
+
+.navbarContainer {
+  background: linear-gradient(
+    to right,
+    #38b2ac,
+    #4299e1
+  ); /* from-teal-500 to-blue-500 */
+}
+
+.header {
+  background-color: #2c5282; /* bg-treal-600 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 1rem 2rem; /* px-4 py-4 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem; /* text-3xl */
+  font-weight: bold; /* font-bold */
+  color: white; /* text-white */
+}
+
+.navList {
+  display: flex;
+  gap: 1.5rem; /* space-x-6 */
+}
+
+.navLink {
+  color: white; /* text-white */
+  transition: color 0.3s;
+}
+
+.navLink:hover {
+  color: #f6e05e; /* hover:text-yellow-300 */
+}
+
+.searchInput {
+  width: 8rem; /* w-32 */
+  padding: 0.25rem 0.5rem; /* px-2 py-1 */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  border-radius: 0.375rem; /* rounded-md */
+  outline: none;
+  transition: all 0.3s;
+}
+
+.searchInput:focus {
+  ring: 2px solid #4299e1; /* focus:ring-blue-500 */
+}
+
+.subscribeButton {
+  width: 100%; /* w-full */
+  background-color: #ecc94b; /* bg-yellow-400 */
+  color: #1a202c; /* text-gray-900 */
+  padding: 0.5rem; /* px-4 py-2 */
+  border-radius: 0.375rem; /* rounded-md */
+  transition: background-color 0.3s;
+}
+
+.subscribeButton:hover {
+  background-color: #fbd38d; /* hover:bg-yellow-300 */
+}
+
+.mobileNav {
+  margin-top: 1rem; /* mt-4 */
+  display: none; /* initially hidden */
+}
+
+@media (max-width: 768px) {
+  .mobileNav {
+    display: block; /* show on mobile */
+  }
+}
+
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space-y-2 */
+}
+
+.mobileLink {
+  display: block;
+  color: white; /* text-white */
+  transition: color 0.3s;
+}
+
+.mobileLink:hover {
+  color: #f6e05e; /* hover:text-yellow-300 */
+}
+
+.mobileActions {
+  margin-top: 1rem; /* mt-4 */
+  display: flex;
+  gap: 1rem; /* space-x-4 */
+}
