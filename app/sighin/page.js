@@ -88,7 +88,7 @@ const Login = () => {
               >
                 create new account
               </Link>
-              if you don't have one.
+              if you don&apost have one.
             </p>
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
