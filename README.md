@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+---
 
-First, run the development server:
+# InfoStream
+
+InfoStream is a web application that provides users with the latest news from various categories using **The Guardian API**. It also features user authentication for sign-in and sign-out, managed via a **Django** backend.
+
+## Live Demo
+
+You can visit the live site here: [InfoStream](https://infostream-one.vercel.app/)
+
+## Features
+
+- **News Feeds**: Fetches and displays the latest articles from various categories, such as technology, business, sports, and more.
+- **Search Functionality**: Allows users to search for specific news articles.
+- **User Authentication**: Sign-up, sign-in, and sign-out functionality using a Django backend.
+- **Responsive Design**: The UI is responsive and adapts to different screen sizes.
+- **Modern UI**: Built using Next.js and Tailwind CSS for fast, responsive, and clean UI.
+
+## Technologies Used
+
+### Frontend:
+- **Next.js**: A React framework for building server-side rendering and static web applications.
+- **React.js**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **The Guardian API**: Provides real-time news data.
+
+### Backend:
+- **Django**: A Python-based web framework that handles authentication (user sign-in, sign-out) and provides secure access to restricted areas of the app.
+- **Django REST Framework (DRF)**: For creating REST APIs that handle user authentication.
+
+## Installation and Setup
+
+### Prerequisites:
+
+- **Node.js**: Download and install Node.js [here](https://nodejs.org/).
+- **Python**: Make sure Python is installed on your system. You can download it [here](https://www.python.org/downloads/).
+- **Django**: Install Django by running `pip install django`.
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/Osamaabdullahi/infostream.git
+cd infostream
+```
+
+### Install Frontend Dependencies
+
+Navigate to the frontend directory:
+
+```bash
+cd frontend
+npm install
+```
+
+
+
+### Environment Variables
+
+Create a `.env.local` file in your frontend directory and add the following environment variables:
+
+```bash
+NEXT_PUBLIC_GUARDIAN_API_KEY=your_guardian_api_key
+```
+
+### Running the Application
+
+#### Frontend:
+In the `frontend` directory, start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be available at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+### Deployment
 
-To learn more about Next.js, take a look at the following resources:
+InfoStream is deployed on **Vercel** for the frontend 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend**: Deployed on Vercel. [Deploy on Vercel](https://vercel.com).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## API Reference
 
-## Deploy on Vercel
+**The Guardian API** is used to fetch news articles. You will need to create an account and get your API key [here](https://open-platform.theguardian.com/access/).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
+
+This README should give users and developers an overview of how the project works, how to set it up, and how they can contribute. Let me know if you need more details!
