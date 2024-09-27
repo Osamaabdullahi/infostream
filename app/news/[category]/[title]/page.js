@@ -5,21 +5,25 @@ import NewsDetailPage from "@/components/NewsDetail";
 
 function Page() {
   const searchParams = useSearchParams();
-  const title = searchParams.get("title");
-  const date = searchParams.get("date");
-  const image = searchParams.get("image");
-  const content = searchParams.get("content");
-  const author = searchParams.get("author");
+  const id = searchParams.get("id");
+  const sectionName = searchParams.get("sectionName");
+  const [sampleArticle, setsampleArticle] = useState(null);
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
-  const sampleArticle = {
-    title,
-    author,
-    date,
-    readTime: 8,
-    image,
-    content,
-    views: 1234,
+  const fetchNews = async () => {
+    let url = `https://content.guardianapis.com/${id}?api-key=${apiKey}&show-fields=thumbnail,trailText,body,byline`;
+    const response = await fetch(url);
+    const data = await response.json();
+    if (response.ok) {
+      setsampleArticle(data.response.content);
+    }
   };
+
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  console.log(sampleArticle);
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">

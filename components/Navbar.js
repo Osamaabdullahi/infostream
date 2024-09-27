@@ -41,7 +41,7 @@ const Navbar = () => {
               </li>
               <li>
                 <a
-                  href="/news/general"
+                  href="/news/world"
                   className="text-white hover:text-yellow-300 transition duration-300"
                 >
                   World
@@ -57,7 +57,7 @@ const Navbar = () => {
               </li>
               <li>
                 <a
-                  href="/news/entertainment"
+                  href="/news/culture"
                   className="text-white hover:text-yellow-300 transition duration-300"
                 >
                   Culture
@@ -69,6 +69,30 @@ const Navbar = () => {
                   className="text-white hover:text-yellow-300 transition duration-300"
                 >
                   business
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/news/travel"
+                  className="text-white hover:text-yellow-300 transition duration-300"
+                >
+                  Travel
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/news/science"
+                  className="text-white hover:text-yellow-300 transition duration-300"
+                >
+                  Science
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/news/environment"
+                  className="text-white hover:text-yellow-300 transition duration-300"
+                >
+                  Environment
                 </a>
               </li>
             </ul>

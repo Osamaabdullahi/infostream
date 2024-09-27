@@ -3,35 +3,31 @@ import Link from "next/link";
 
 function TopNews({ topNews }) {
   return (
-    <section className="bg-gradient-to-r from-teal-500 to-blue-500 pb-10">
+    <section className="bg-gradient-to-r from-teal-500 to-blue-500 pb-14">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center min-h-[70vh]">
           <div className="w-full md:w-3/5 mb-8 md:mb-0 md:pr-8 flex flex-col justify-center items-start h-full">
             <span className="text-yellow-300 font-semibold text-lg">
-              World News
+              {topNews[0].sectionName}
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-white">
-              {topNews[0].title}
+              {topNews[0].webTitle}
             </h2>
             <p className="text-lg text-gray-100 mb-6">
-              {topNews[0].description}
+              {topNews[0].fields.trailText}
             </p>
+
             <div className="flex items-center text-gray-200">
-              <span>By {topNews[0].author}</span>
+              <span>By {topNews[0].fields.byline}</span>
               <span className="mx-2">|</span>
-              <span>{topNews[0].publishedAt}</span>
+              <span>{topNews[0].webPublicationDate}</span>
             </div>
             <Link
               href={{
-                pathname: `/news/general/${topNews[0].title}`,
+                pathname: `/news/general/${topNews[0].webTitle}`,
                 query: {
-                  title: topNews[0].title,
-                  date: topNews[0].publishedAt,
-                  image:
-                    topNews[0].urlToImage ||
-                    "https://i.pinimg.com/564x/a0/ae/8d/a0ae8da0d3e41a59e2367fa5709294e8.jpg",
-                  content: topNews[0].description,
-                  author: topNews[0].author,
+                  id: topNews[0].id,
+                  sectionName: topNews[0].sectionName,
                 },
               }}
             >
@@ -43,7 +39,7 @@ function TopNews({ topNews }) {
           <div className="w-full md:w-2/5">
             <img
               src={
-                topNews[0].urlToImage ||
+                topNews[0].fields.thumbnail ||
                 "https://i.pinimg.com/564x/a0/ae/8d/a0ae8da0d3e41a59e2367fa5709294e8.jpg"
               }
               alt="Top news"

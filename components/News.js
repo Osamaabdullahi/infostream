@@ -16,50 +16,51 @@ const NewsComponent = () => {
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
   const getNews = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+    let url = `https://content.guardianapis.com/search?api-key=${apiKey}&show-fields=thumbnail,trailText,body,byline&page-size=12`;
     const response = await fetch(url);
     const data = await response.json();
+
     if (response.ok) {
-      setAllnews(data.articles);
+      setAllnews(data.response.results);
     }
   };
 
   const getTrending = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+    let url = `https://content.guardianapis.com/search?api-key=${apiKey}&section=technology&show-fields=thumbnail,trailText,body,byline&page-size=29`;
     const response = await fetch(url);
     const data = await response.json();
     if (response.ok) {
-      setTrendingData(data.articles);
+      setTrendingData(data.response.results);
     }
   };
 
   const getSide = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${apiKey}`;
+    let url = `https://content.guardianapis.com/search?api-key=${apiKey}&section=business&show-fields=thumbnail,trailText,body,byline&page-size=12`;
     const response = await fetch(url);
     const data = await response.json();
 
     if (response.ok) {
-      setSideData(data.articles);
+      setSideData(data.response.results);
     }
   };
 
   const getSecond = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${apiKey}`;
+    let url = `https://content.guardianapis.com/search?api-key=${apiKey}&section=sport&show-fields=thumbnail,trailText,body,byline&page-size=12`;
     const response = await fetch(url);
     const data = await response.json();
     if (response.ok) {
-      setSecondData(data.articles);
+      setSecondData(data.response.results);
     }
   };
 
   useEffect(() => {
     getNews();
-    getTrending();
     getSide();
     getSecond();
+    getTrending();
   }, []);
 
-  if (!Allnews || !TrendingData || !SideData || !SecondData) {
+  if (!Allnews || !SideData || !SecondData || !TrendingData) {
     return <div className="h-[100vh]">Loading...</div>;
   }
 
@@ -83,18 +84,9 @@ const NewsComponent = () => {
         style={{ margin: "1em 0 2em 0" }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4"
       >
-        {SideData.map((item, index) => (
-          <Second key={index} item={item} />
-        ))}
-      </div>
-
-      <div
-        style={{ margin: "1em 0 2em 0" }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4"
-      >
-        {Allnews.slice(10, 14).map((news, index) => (
-          <NewsCard news={news} key={index} />
-        ))}
+        {SideData.map((item, index) => {
+          return <Second key={index} item={item} />;
+        })}
       </div>
 
       <div className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8 p-4">
@@ -103,7 +95,7 @@ const NewsComponent = () => {
             Latest Updates
           </h2>
           <div className="space-y-6">
-            {SecondData.slice(10, 19).map((news, index) => (
+            {SecondData.map((news, index) => (
               <Sidenews news={news} key={index} />
             ))}
           </div>

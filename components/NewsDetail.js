@@ -9,11 +9,11 @@ const NewsDetailComponent = ({ article, relatedNews }) => {
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
   const getSecond = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${apiKey}`;
+    let url = `https://content.guardianapis.com/search?api-key=${apiKey}&section=sport&show-fields=thumbnail`;
     const response = await fetch(url);
     const data = await response.json();
     if (response.ok) {
-      setSideData(data.articles);
+      setSideData(data.response.results);
     }
   };
 
@@ -34,75 +34,31 @@ const NewsDetailComponent = ({ article, relatedNews }) => {
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Article Section */}
         <div className="lg:w-2/3">
-          <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
+          <h1 className="text-3xl font-bold mb-4">{article.webTitle}</h1>
           <div className="flex items-center space-x-4 text-gray-600 mb-4">
             <div className="flex items-center">
               <User size={16} className="mr-2" />
-              <span>{article.author}</span>
+              <span>{article.fields.byline}</span>
             </div>
             <div className="flex items-center">
               <Calendar size={16} className="mr-2" />
-              <span>{article.date}</span>
+              <span>{article.webPublicationDate}</span>
             </div>
             <div className="flex items-center">
               <Clock size={16} className="mr-2" />
-              <span>{article.readTime} min read</span>
+              <span>6 min read</span>
             </div>
           </div>
           <img
-            src={article.image}
-            alt={article.title}
+            src={article.fields.thumbnail}
+            alt="thumbnail"
             className="w-full h-80 object-cover rounded-lg mb-6"
           />
           <div className="prose max-w-none">
-            {/* {article.content.split("\n").map((paragraph, index) => (
-              <p key={index} className="mb-4">
-                {paragraph}
-              </p>
-            ))} */}
-            <p className="mb-4">
-              Despite its vast potential, AI poses numerous challenges and
-              ethical concerns. One of the major issues is the potential
-              displacement of jobs due to automation. While AI creates new job
-              opportunities in emerging sectors, it also threatens jobs in
-              industries such as manufacturing, transportation, and customer
-              service. Bias in AI systems is another concern. Since AI models
-              learn from data, they can inadvertently perpetuate biases present
-              in the training data, leading to unfair outcomes, particularly in
-              critical areas like hiring, lending, and law enforcement. Ensuring
-              fairness, transparency, and accountability in AI systems is
-              crucial to avoid reinforcing societal inequalities. AI also raises
-              concerns about privacy and surveillance. The ability of AI systems
-              to collect and analyze vast amounts of data has led to debates
-              about how this data is used and the potential for surveillance.
-              The ethical use of AI in law enforcement and national security
-              remains a controversial issue. The development of AGI and ASI
-              raises existential questions about the future of humanity. As AI
-              systems become more intelligent, controlling their behavior and
-              ensuring alignment with human values becomes a critical challenge.
-              Thought leaders such as Elon Musk and Stephen Hawking have warned
-              of the potential risks of creating superintelligent AI that could
-              operate beyond human control. The Future of AI The future of AI
-              holds both exciting possibilities and complex challenges. AI is
-              expected to continue its rapid advancement, with innovations in
-              quantum computing, neural networks, and natural language
-              processing pushing the boundaries of what AI can achieve. As AI
-              systems become more integrated into daily life, it will be
-              essential to establish frameworks for their ethical development
-              and regulation. Collaboration between governments, corporations,
-              researchers, and society at large will be necessary to ensure that
-              AI is used for the benefit of humanity while minimizing its risks.
-              Policymakers will need to address issues such as job displacement,
-              privacy, security, and bias, while promoting the use of AI in
-              solving global challenges such as climate change, healthcare, and
-              education. In conclusion, AI represents a powerful tool that has
-              the potential to reshape the world in profound ways. While it
-              presents challenges and ethical dilemmas, it also offers
-              opportunities to improve human lives, drive innovation, and solve
-              some of the most pressing problems facing society today. The key
-              to realizing the benefits of AI lies in developing it responsibly
-              and ensuring its alignment with human values.
-            </p>
+            <div
+              className="prose prose-sm max-w-none text-gray-600 mt-4"
+              dangerouslySetInnerHTML={{ __html: article.fields.body }}
+            ></div>
           </div>
           <div className="flex items-center justify-between mt-8 pt-4 border-t border-gray-200">
             <div className="flex items-center space-x-4">
@@ -115,24 +71,17 @@ const NewsDetailComponent = ({ article, relatedNews }) => {
                 <span>Share</span>
               </button>
             </div>
-            <div className="text-gray-600">{article.views} views</div>
+            <div className="text-gray-600">543 views</div>
           </div>
 
-          {/* {more news section} */}
-          <div className="flex flex-col  lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">
-            <section
-              className="w-full lg:w-2/3"
-              style={{ margin: "2em 0 0 0 " }}
-            >
-              <h2 className="text-2xl font-bold mb-6 text-teal-700 ">
-                More News
-              </h2>
-              <div className="space-y-6 ">
-                {SideData.map((news, index) => (
-                  <Sidenews news={news} key={index} />
-                ))}
-              </div>
-            </section>
+          <h2 className="text-2xl font-bold mb-6 text-teal-700 mt-4">
+            More News
+          </h2>
+
+          <div className="space-y-6 mt-4">
+            {SideData.map((news, index) => (
+              <Sidenews news={news} key={index} />
+            ))}
           </div>
         </div>
 
@@ -145,26 +94,19 @@ const NewsDetailComponent = ({ article, relatedNews }) => {
               <Link
                 key={index}
                 href={{
-                  pathname: `/news/general/${news.id}`,
+                  pathname: `/news/general/${news.webTitle}`,
                   query: {
-                    title: news.title,
-                    date: news.publishedAt,
-                    image:
-                      news.urlToImage ||
-                      "https://i.pinimg.com/564x/a0/ae/8d/a0ae8da0d3e41a59e2367fa5709294e8.jpg",
-                    content: news.description,
-                    author: news.author,
+                    id: news.id,
                   },
                 }}
               >
-                {" "}
                 <div className="bg-white rounded-lg shadow-md overflow-hidden">
                   <img
                     src={
-                      news.urlToImage ||
+                      news.fields.thumbnail ||
                       "https://i.pinimg.com/564x/a0/ae/8d/a0ae8da0d3e41a59e2367fa5709294e8.jpg"
                     }
-                    alt={news.title}
+                    alt={news.webTitle}
                     className="w-full h-48 object-cover"
                     onError={(e) => {
                       e.target.onerror = null; // Prevents infinite loop if default image fails
@@ -173,10 +115,14 @@ const NewsDetailComponent = ({ article, relatedNews }) => {
                     }}
                   />
                   <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-2">{news.title}</h3>
-                    <p className="text-gray-600 text-sm mb-2">{news.summary}</p>
+                    <h3 className="font-semibold text-lg mb-2">
+                      {news.webTitle}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-2">
+                      {news.trailText}
+                    </p>
                     <div className="flex justify-between items-center text-xs text-gray-500">
-                      <span>{news.publishedAt}</span>
+                      <span>{news.webPublicationDate}</span>
                       <span>5 min read</span>
                     </div>
                   </div>
@@ -195,11 +141,12 @@ export default function NewsDetailPage({ sampleArticle }) {
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
   const getRelatedNews = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+    let url = `https://content.guardianapis.com/search?api-key=${apiKey}&section=technology&show-fields=thumbnail,trailText,body,byline&page-size=29`;
     const response = await fetch(url);
     const data = await response.json();
+
     if (response.ok) {
-      setRelatedData(data.articles);
+      setRelatedData(data.response.results);
     }
   };
 
