@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAFAF7;
+  --foreground: #181A1F;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-sans: "Inter", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: #16233F;
+  color: #FAFAF7;
+}
+
+/* Editorial utility classes shared across pages */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hairline {
+  border-color: #DEDBCF;
+}
+
+.section-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+}
+
+/* Drop cap for long-form article bodies */
+.article-body > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.6rem;
+  line-height: 3rem;
+  font-weight: 600;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  color: #16233F;
+}
+
+.article-body p {
+  margin-bottom: 1.1em;
+  line-height: 1.75;
+}
+
+.article-body a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-body figure {
+  margin: 1.5em 0;
+}
+
+.article-body img {
+  width: 100%;
+  height: auto;
+}
+
+/* Custom scrollbar, subtle */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FAFAF7;
+}
+::-webkit-scrollbar-thumb {
+  background: #DEDBCF;
+  border-radius: 0;
+}
